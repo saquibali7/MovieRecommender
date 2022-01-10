@@ -1,0 +1,92 @@
+body {
+  background-color: :#f0f8ff;
+}
+
+
+.header {
+  position:center;
+  background-image: url('https://s3-us-west-2.amazonaws.com/prd-rteditorial/wp-content/uploads/2018/03/13153742/RT_300EssentialMovies_700X250.jpg');
+  color: #F5F5F5;
+  padding:20px;
+  margin: 20px;
+}
+
+.primary_heading{
+  display: flex;
+  justify-content: flex-start;
+}
+
+.secondary_heading{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.card-body{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.card {
+  margin: 5px;
+}
+
+.row {
+  margin: 20px;
+}
+
+.rec_movie_name{
+  height: 70px;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin: 15px;
+  background-color: #35858B;
+}
+
+img {
+  height: 450px;
+  width:320px;
+}
+
+.recommend_movie{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.movie_details {
+  border: 2px solid #30475E;
+  border-radius: 5px;
+  margin:10px;
+  padding:10px;
+}
+
+.movie_details_name{
+  border: 2px solid #30475E;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+input {
+  height: 30px;
+  width:400px;
+  border-radius: 10px;
+}
+
+button{
+  background-color: #30475E;
+  height: 35px;
+  border-radius: 10px;
+  border-style: solid;
+  padding: 10px;
+}
+footer {
+  height: 130px;
+  background-color: #30475E;
+  text-align: center;
+  margin: 0;
+}
+
+.footer-text{
+  font-size: 20px;
+  padding: 50px;
+}

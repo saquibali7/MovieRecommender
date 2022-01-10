@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Movie Recommender</title>
+  <link rel="stylesheet" href="static/CSS/styles.css">
+</head>
+
+<body>
+  <div class="header">
+    <div class="primary_heading">
+      <h1><a href="/">Movie recommend</a></h1>
+    </div>
+    <div class="secondary_heading">
+      <h2><a href="/watchlist">WATCHLIST</a></h2>
+      <h2></h2>
+    </div>
+  </div>
+
+<div class="recommend_movie">
+  {% for i in range list(movies) %}
+  <div class="movie_details">
+    <img src="{{  poster[i] }}" alt="">
+    <div class="movie_details_name">
+      <p>{{ movies[i] }}</p>
+      <button type="button" class="movie-btn "><form action="/watchlist" method="post">
+      <input name="id" type="hidden" value="id">
+      <input type="submit" value="Add to watchlist">
+      </form></button>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<footer>
+  <div class="footer-text">
+    <p>created by Saquib Ali</p>
+  </div>
+</footer>
+
+
+</body>
+
+</html>
