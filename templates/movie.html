@@ -1,31 +1,30 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <meta charset="utf-8">
-  <title>Movie Recommender</title>
-  <link rel="stylesheet" href="static/CSS/styles.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+{% block body %}
 
-  <script src="https://kit.fontawesome.com/a9724eb378.js" crossorigin="anonymous"></script>
-</head>
 
 <body>
-  <div class="header">
-    <div class="primary_heading">
-      <h1>Movie recommend</h1>
-    </div>
-    <div class="secondary_heading">
-      <h2><a href="/watchlist">WATCHLIST</a></h2>
-      <h2></h2>
-    </div>
+  <div class="header-bar">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="/"><i class="fas fa-home">Home</i></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="navbar-brand" href="/movie"> <i class="fas fa-home">Home</i></a>
+          </li>
+        </ul>
+        <li class="nav-item">
+          <a class="navbar-brand" href="/">WatchList</a>
+        </li>
+      </div>
+    </nav>
   </div>
 
   <div class="rec_movie_name">
-    <h2>Result for {{ movie_name }}</h2>
+    <p>Result for {{ movie_name }}</p>
   </div>
 
   <div class="recommend_movie">
@@ -33,130 +32,24 @@
 
     <div class="row">
 
-      <div class="pricing-column col-lg-3 col-md-6">
+      {% for i in range(8) %}
+      <div class=" pricing-column col-lg-3 col-md-6">
         <div class="card">
           <div class="card-body">
-            <img src="{{  poster[0] }}" alt="">
-            <h3>{{ new_movie[0] }}</h3>
+            <img src="{{  poster[i] }}" alt="">
+            <p class="movie-name">{{ new_movie[i] }}</p>
             <button type="button" class="btn btn-outline-dark btn-block ">Cart</button>
 
 
           </div>
         </div>
       </div>
-
-
-      <div class="pricing-column col-lg-3 col-md-6">
-        <div class="card">
-          <div class="card-body">
-            <img src="{{  poster[1] }}" alt="">
-
-            <h3>{{ new_movie[1] }}</h3>
-            <button type="button" class="btn btn-outline-dark btn-block ">Cart</button>
-
-
-          </div>
-        </div>
-      </div>
-
-
-      <div class=" pricing-column col-lg-3 col-md-6">
-        <div class="card">
-          <div class="card-body">
-            <img src="{{  poster[2] }}" alt="">
-
-            <h3>{{ new_movie[2] }}</h3>
-            <button type="button" class="btn btn-outline-dark btn-block ">Cart</button>
-
-
-          </div>
-        </div>
-      </div>
-
-
-      <div class=" pricing-column col-lg-3 col-md-6">
-        <div class="card">
-          <!-- <div class="card-header">
-
-        </div> -->
-          <div class="card-body">
-            <img src="{{  poster[3] }}" alt="">
-            <h3>{{ new_movie[3] }}</h3>
-            <button type="button" class="btn btn-outline-dark btn-block ">Wishlist</button>
-
-
-          </div>
-        </div>
-      </div>
-
-
-      <div class=" pricing-column col-lg-3 col-md-6">
-        <div class="card">
-          <div class="card-body">
-            <img src="{{  poster[4] }}" alt="">
-
-
-            <h3>{{ new_movie[4] }}</h3>
-            <button type="button" class="btn btn-outline-dark btn-block ">Wishlist</button>
-
-
-          </div>
-        </div>
-      </div>
+      {% endfor %}
 
 
 
     </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-  <!-- <div class="movie_details">
-    <img src="{{  poster[0] }}" alt="">
-    <div class="movie_details_name">
-      <p>{{ new_movie[0] }}</p>
-    </div>
-  </div>
-  <div class="movie_details">
-    <img src="{{  poster[1] }}" alt="">
-    <div class="movie_details_name">
-      <p>{{ new_movie[1] }}</p>
-    </div>
-  </div>
-  <div class="movie_details">
-    <img src="{{  poster[2] }}" alt="">
-    <div class="movie_details_name">
-      <p>{{ new_movie[2] }}</p>
-    </div>
-  </div>
-  <div class="movie_details">
-    <img src="{{  poster[3] }}" alt="">
-    <div class="movie_details_name">
-      <p>{{ new_movie[3] }}</p>
-    </div>
-  </div>
-  <div class="movie_details">
-    <img src="{{  poster[4] }}" alt="">
-    <div class="movie_details_name">
-      <p>{{ new_movie[4] }}</p>
-    </div>
-  </div> -->
-  <!-- </div> -->
-
-
-  <footer>
-    <div class="footer-text">
-      <p>created by Saquib Ali</p>
-    </div>
-  </footer>
-
 </body>
 
-</html>
+{% endblock %}

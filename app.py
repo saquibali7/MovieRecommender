@@ -9,6 +9,9 @@ new_movie = []
 poster = []
 
 
+popular_movies = ["Titanic", "Spectre", "Iron Man", "Avatar", "Batman", "Superman", "Skyfall", "The Notebook"]
+
+
 app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"]=False
@@ -23,10 +26,6 @@ movies_dict = pickle.load(open('movies_dict.pkl', 'rb'))
 movies = pd.DataFrame(movies_dict)
 
 
-def movie_new(movie):
-    index = movies[movies['title']==movie].index[0]
-    poster = fetch_poster(index)
-
 
 
 def fetch_poster(movie_id):
@@ -38,6 +37,16 @@ def fetch_poster(movie_id):
     return full_path
 
 
+# def popular():
+#     popular_new_movies = []
+#     popular_posters = []
+#     for popular_movie in popular_movies:
+#         index=movies[popular_movie].movie_id
+#         # index=movies[movies['title']==popular_movie].index[0]
+#         popular_new_movies.append(popular_movie)
+#         popular_posters.append(fetch_poster(index))
+#     return popular_new_movies, popular_posters
+
 
 
 def recommend(movie):
@@ -45,7 +54,7 @@ def recommend(movie):
     distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
     recommended_movie_names = []
     recommended_movie_posters = []
-    for i in distances[1:6]:
+    for i in distances[1:9]:
         movie_id = movies.iloc[i[0]].movie_id
         recommended_movie_posters.append(fetch_poster(movie_id))
         recommended_movie_names.append(movies.iloc[i[0]].title)
@@ -60,6 +69,7 @@ def recommend(movie):
 def home():
     movie_name = "Spectre"
     new_movie, poster = recommend(movie_name)
+    # new_movie , poster = popular()
     return render_template('index.html', new_movie=new_movie, poster=poster, movies=movies)
 
 @app.route('/movie',  methods=['GET', 'POST'])

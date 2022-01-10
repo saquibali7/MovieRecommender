@@ -1,146 +1,81 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <meta charset="utf-8">
-  <title>Movie Recommender</title>
-  <link rel="stylesheet" href="static/CSS/styles.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+{% block body %}
 
-  <script src="https://kit.fontawesome.com/a9724eb378.js" crossorigin="anonymous"></script>
-</head>
 
 <body>
-  <div class="header">
-    <div class="primary_heading">
-      <h1><a href="/">Movie recommend</a></h1>
-    </div>
-    <div class="secondary_heading">
-      <h2><a href="/watchlist">WATCHLIST</a></h2>
-    </div>
+
+
+  <div class="header-bar">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="/"><i class="fas fa-home"> Home</i></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="navbar-brand" href="/movie"> Movies</i></a>
+          </li>
+        </ul>
+        <li class="nav-item">
+          <a class="navbar-brand" href="/">WatchList</a>
+        </li>
+      </div>
+    </nav>
   </div>
-  <div class="search-box">
+
+
+
+  <div class="input-group">
     <form action="/movie" , method="POST">
-      <input class="searchButton" autocomplete="off"  autofocus  placeholder="Query"  type="search"  name="movieName">
-      <ul></ul>
-      <button class="searchButton" type="submit" value="Submit">recommend</button>
+      <div class="search-box">
+        <input class="form-control" autocomplete="off" autofocus placeholder="MovieName" name="movieName">
+        <div class="input-group-append">
+          <button class="btn btn-secondary" type="submit" value="Submit">recommend</button>
+        </div>
+      </div>
     </form>
   </div>
 
-  <h1>Popular Movies</h1>
 
+  <div class="rec_movie_name">
+    <p>Popular Movies</p>
+  </div>
   <div class="recommend_movie">
 
     <div class="row">
 
+      {% for i in range(8) %}
       <div class=" pricing-column col-lg-3 col-md-6">
         <div class="card">
           <div class="card-body">
-            <<img src="{{  poster[0] }}" alt="">
-
-
-               <h3>{{ new_movie[0] }}</h3>
-              <button type="button" class="btn btn-outline-dark btn-block ">Cart</button>
+            <img src="{{  poster[i] }}" alt="">
+            <p class="movie-name">{{ new_movie[i] }}</p>
+            <button type="button" class="btn btn-outline-dark btn-block ">Add to watchlist</button>
 
 
           </div>
         </div>
       </div>
-
-
-      <div class=" pricing-column col-lg-3 col-md-6">
-        <div class="card">
-          <div class="card-body">
-            <img src="{{  poster[1] }}" alt="">
-
-              <h3>{{ new_movie[1] }}</h3>
-              <button type="button" class="btn btn-outline-dark btn-block ">Cart</button>
-
-
-          </div>
-        </div>
-      </div>
-
-
-      <div class=" pricing-column col-lg-3 col-md-6">
-        <div class="card">
-          <div class="card-body">
-            <img src="{{  poster[2] }}" alt="">
-
-              <h3>{{ new_movie[2] }}</h3>
-              <button type="button" class="btn btn-outline-dark btn-block ">Cart</button>
-
-
-          </div>
-        </div>
-      </div>
-
-
-      <div class=" pricing-column col-lg-3 col-md-6">
-        <div class="card">
-          <!-- <div class="card-header">
-
-          </div> -->
-          <div class="card-body">
-            <img src="{{  poster[3] }}" alt="">
-               <h3>{{ new_movie[3] }}</h3>
-              <button type="button" class="btn btn-outline-dark btn-block ">Wishlist</button>
-
-
-          </div>
-        </div>
-      </div>
-
-
-      <div class=" pricing-column col-lg-3 col-md-6">
-        <div class="card">
-          <div class="card-body">
-            <img src="{{  poster[4] }}" alt="">
-
-
-              <h3>{{ new_movie[4] }}</h3>
-              <button type="button" class="btn btn-outline-dark btn-block ">Wishlist</button>
-
-
-          </div>
-        </div>
-      </div>
-
-
-
-
-
+      {% endfor %}
 
     </div>
-
   </div>
 
-  <footer>
-    <div class="footer-text">
-      <p>Created by Saquib Ali</p>
-    </div>
-  </footer>
-
   <script crossorigin="anonymous" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-          <script>
+  <script>
+    let input = document.querySelector('input');
+    input.addEventListener('keyup', function() {
+      $.get('/search?q=' + input.value, function(movies) {
+        let html = '';
+        for (let movie_id in movies) {
+          let title = movies[id].title;
+          html += '<li>' + title + '</li>';
+        }
+        document.querySelector('ul').innerHTML = html;
+      });
+    });
+  </script>
 
-              let input = document.querySelector('input');
-              input.addEventListener('keyup', function() {
-                  $.get('/search?q=' + input.value, function(movies) {
-                    let html = '';
-                    for (let movie_id in movies)
-                    {
-                        let title = movies[id].title;
-                        html += '<li>' + title + '</li>';
-                    }
-
-                    document.querySelector('ul').innerHTML = html;
-                  });
-              });
-
-    </script>
-
-</html>
+  {% endblock %}

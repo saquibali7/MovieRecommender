@@ -1,29 +1,19 @@
 body {
-  background-color: :#f0f8ff;
+background-color: #f0f8ff;
+background-image: url("https://transparenttextures.com/patterns/asfalt-dark.png");
 }
 
-
-.header {
-  position:center;
-  background-image: url('https://s3-us-west-2.amazonaws.com/prd-rteditorial/wp-content/uploads/2018/03/13153742/RT_300EssentialMovies_700X250.jpg');
-  color: #F5F5F5;
-  padding:20px;
-  margin: 20px;
-}
-
-.primary_heading{
-  display: flex;
-  justify-content: flex-start;
-}
-
-.secondary_heading{
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+.header-bar {
+  padding: 50px;
 }
 
 .card-body{
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.input-group{
+  display: flex;
+  justify-content: center;
 }
 
 .card {
@@ -35,22 +25,18 @@ body {
 }
 
 .rec_movie_name{
-  height: 70px;
-  width: 100%;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  margin: 15px;
-  background-color: #35858B;
+  font-size: 35px;
+  font-style: oblique;
+  font-weight: bold;
+  font-family: inherit;
+  font-style: oblique;
+  padding: 20px;
+  text-align: center;
 }
 
 img {
   height: 450px;
   width:320px;
-}
-
-.recommend_movie{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
 }
 
 .movie_details {
@@ -61,27 +47,20 @@ img {
 }
 
 .movie_details_name{
-  border: 2px solid #30475E;
   font-size: 30px;
+}
+
+.movie-name{
+  font-size: 27px;
+  font-style: oblique;
   font-weight: bold;
+  font-family: inherit;
 }
 
-input {
-  height: 30px;
-  width:400px;
-  border-radius: 10px;
-}
 
-button{
-  background-color: #30475E;
-  height: 35px;
-  border-radius: 10px;
-  border-style: solid;
-  padding: 10px;
-}
 footer {
   height: 130px;
-  background-color: #30475E;
+  background-color:#142F43;
   text-align: center;
   margin: 0;
 }
@@ -89,4 +68,12 @@ footer {
 .footer-text{
   font-size: 20px;
   padding: 50px;
+  color:#f0f8ff;
+}
+
+.search-box {
+  display: flex;
+  flex-direction: row;
+  position: center;
+  margin: 10px;
 }
