@@ -1,45 +1,49 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <meta charset="utf-8">
-  <title>Movie Recommender</title>
-  <link rel="stylesheet" href="static/CSS/styles.css">
-</head>
+{% block body %}
+
 
 <body>
-  <div class="header">
-    <div class="primary_heading">
-      <h1><a href="/">Movie recommend</a></h1>
-    </div>
-    <div class="secondary_heading">
-      <h2><a href="/watchlist">WATCHLIST</a></h2>
-      <h2></h2>
-    </div>
+  <div class="header-bar">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="/"><i class="fas fa-home"> Home</i></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="navbar-brand" href="/movie"> Movies</i></a>
+          </li>
+        </ul>
+        <li class="nav-item">
+          <a class="navbar-brand" href="/">WatchList</a>
+        </li>
+      </div>
+    </nav>
+  </div>
+
+
+  <div class="rec_movie_name">
+    <p>Result for {{ movie_name }}</p>
   </div>
 
 <div class="recommend_movie">
-  {% for i in range list(movies) %}
-  <div class="movie_details">
-    <img src="{{  poster[i] }}" alt="">
-    <div class="movie_details_name">
-      <p>{{ movies[i] }}</p>
-      <button type="button" class="movie-btn "><form action="/watchlist" method="post">
-      <input name="id" type="hidden" value="id">
-      <input type="submit" value="Add to watchlist">
-      </form></button>
+  {% for movie, poster in movies_posters %}
+  <div class=" pricing-column col-lg-3 col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <img src="{{  poster }}" alt="">
+        <p class="movie-name">{{ movie }}</p>
+        <button type="button" class="btn btn-outline-dark btn-block "><form action="/watchlist" method="post">
+            <input name="id" type="hidden" value="id">
+            <input type="submit" value="Add to Cart">
+        </form></button>
+
+      </div>
     </div>
   </div>
   {% endfor %}
 </div>
 
-<footer>
-  <div class="footer-text">
-    <p>created by Saquib Ali</p>
-  </div>
-</footer>
-
-
-</body>
-
-</html>
+{% endblock %}

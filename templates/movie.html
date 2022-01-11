@@ -38,9 +38,10 @@
           <div class="card-body">
             <img src="{{  poster[i] }}" alt="">
             <p class="movie-name">{{ new_movie[i] }}</p>
-            <button type="button" class="btn btn-outline-dark btn-block ">Cart</button>
-
-
+            <button type="button" class="btn btn-outline-dark btn-block "><form action="/watchlist" method="post">
+                <input name="id" type="hidden" value="{{ new_movie[i] }}">
+                <input type="submit" value="Add to Cart">
+            </form></button>
           </div>
         </div>
       </div>

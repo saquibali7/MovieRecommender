@@ -3,13 +3,12 @@ from flask import Flask, render_template, request, redirect, session
 from flask_session import Session
 import pickle
 import requests
+import re
+import itertools
 
 
 new_movie = []
 poster = []
-
-
-popular_movies = ["Titanic", "Spectre", "Iron Man", "Avatar", "Batman", "Superman", "Skyfall", "The Notebook"]
 
 
 app = Flask(__name__)
@@ -36,18 +35,17 @@ def fetch_poster(movie_id):
     full_path = "https://image.tmdb.org/t/p/w500/" + poster_path
     return full_path
 
+def get_poster(movie_name):
+    index = movies[movies['title'] == movie_name].index[0]
+    id = movies.iloc[index].movie_id
+    return fetch_poster(id)
 
-# def popular():
-#     popular_new_movies = []
-#     popular_posters = []
-#     for popular_movie in popular_movies:
-#         index=movies[popular_movie].movie_id
-#         # index=movies[movies['title']==popular_movie].index[0]
-#         popular_new_movies.append(popular_movie)
-#         popular_posters.append(fetch_poster(index))
-#     return popular_new_movies, popular_posters
-
-
+def popular():
+    popular_movies = ["Titanic", "Spectre", "Iron Man", "Avatar", "Batman", "Superman", "Skyfall", "The Notebook"]
+    for i in range(8):
+        new_movie.append(popular_movies[i])
+        poster.append(get_poster(popular_movies[i]))
+    return new_movie, poster
 
 def recommend(movie):
     index = movies[movies['title'] == movie].index[0]
@@ -68,37 +66,44 @@ def recommend(movie):
 @app.route('/',  methods=['GET', 'POST'])
 def home():
     movie_name = "Spectre"
-    new_movie, poster = recommend(movie_name)
-    # new_movie , poster = popular()
-    return render_template('index.html', new_movie=new_movie, poster=poster, movies=movies)
+    new_movie, poster = popular()
+    q = request.args.get("q")
+    if q:
+        for movie in movies:
+            if(re.match(q,movie.title)):
+                search_movies.append(movie)
+    else :
+        search_movies = []
+    return render_template('index.html', new_movie=new_movie, poster=poster, search_movies=search_movies)
 
 @app.route('/movie',  methods=['GET', 'POST'])
 def movie():
     if request.method == 'POST':
         movie_name = request.form.get("movieName")
+        if  not movie_name:
+            return render_template('error.html')
         new_movie, poster = recommend(movie_name)
         return render_template('movie.html', movie_name=movie_name, new_movie=new_movie, poster=poster)
     else:
         return render_template('index.html')
 
 
+
 @app.route('/watchlist',  methods=['GET', 'POST'])
 def watchlist():
+    posters = []
     if "watchlist" not in session:
         session["watchlist"] = []
     if request.method == "POST" :
-        movies = request.form.get("movieName")
-        poster = movie_new(movies)
-        if movies:
-            session["watchlist"].append(movies)
-        return redirect("/watchlist")
-
+        id = request.form.get("id")
+        if id:
+            session["watchlist"].append(id)
+        return redirect('/watchlist')
 
     movies = session["watchlist"]
-    return render_template('watchlist.html', movies=movies, poster=poster)
-
-
-
+    for movie in movies:
+        posters.append(get_poster(movie))
+    return render_template('watchlist.html', movies_posters=zip(movies,posters))
 
 
 if __name__ == "__main__":
