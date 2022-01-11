@@ -13,6 +13,7 @@ poster = []
 
 app = Flask(__name__)
 
+
 app.config["SESSION_PERMANENT"]=False
 app.config["SESSION_TYPE"]="filesystem"
 Session(app)
@@ -26,7 +27,6 @@ movies = pd.DataFrame(movies_dict)
 
 
 
-
 def fetch_poster(movie_id):
     url = "https://api.themoviedb.org/3/movie/{}?api_key=8265bd1679663a7ea12ac168da84d2e8&language=en-US".format(movie_id)
     data = requests.get(url)
@@ -35,10 +35,12 @@ def fetch_poster(movie_id):
     full_path = "https://image.tmdb.org/t/p/w500/" + poster_path
     return full_path
 
+
 def get_poster(movie_name):
     index = movies[movies['title'] == movie_name].index[0]
     id = movies.iloc[index].movie_id
     return fetch_poster(id)
+
 
 def popular():
     popular_movies = ["Titanic", "Spectre", "Iron Man", "Avatar", "Batman", "Superman", "Skyfall", "The Notebook"]
@@ -46,6 +48,7 @@ def popular():
         new_movie.append(popular_movies[i])
         poster.append(get_poster(popular_movies[i]))
     return new_movie, poster
+
 
 def recommend(movie):
     index = movies[movies['title'] == movie].index[0]
@@ -61,8 +64,6 @@ def recommend(movie):
 
 
 
-
-
 @app.route('/',  methods=['GET', 'POST'])
 def home():
     movie_name = "Spectre"
@@ -75,6 +76,8 @@ def home():
     else :
         search_movies = []
     return render_template('index.html', new_movie=new_movie, poster=poster, search_movies=search_movies)
+
+
 
 @app.route('/movie',  methods=['GET', 'POST'])
 def movie():
@@ -104,6 +107,7 @@ def watchlist():
     for movie in movies:
         posters.append(get_poster(movie))
     return render_template('watchlist.html', movies_posters=zip(movies,posters))
+
 
 
 if __name__ == "__main__":

@@ -15,7 +15,7 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="navbar-brand" href="/movie"> Movies</a>
+            <a class="navbar-brand" href="/movie"></a>
           </li>
         </ul>
         <li class="nav-item">
@@ -31,7 +31,6 @@
     <form action="/movie" , method="POST">
       <div class="search-box">
         <input class="form-control" autocomplete="off" autofocus placeholder="MovieName" name="movieName" type="search">
-        <ul></ul>
         <div class="input-group-append">
           <button class="btn btn-secondary" type="submit" value="Submit">recommend</button>
         </div>
@@ -54,8 +53,8 @@
             <img src="{{  poster[i] }}" alt="">
             <p class="movie-name">{{ new_movie[i] }}</p>
             <button type="button" class="btn btn-outline-dark btn-block "><form action="/watchlist" method="post">
-                <input name="id" type="hidden" value="{{ new_movie[i] }}">
-                <input type="submit" value="Add to Cart">
+              <input name="id" type="hidden" value="{{ new_movie[i] }}">
+              <input class="form-control" type="submit" value="Add to Watchlist">
             </form></button>
 
           </div>

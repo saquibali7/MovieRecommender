@@ -13,7 +13,7 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="navbar-brand" href="/movie"> <i class="fas fa-home">Home</i></a>
+            <a class="navbar-brand" href="/movie"></a>
           </li>
         </ul>
         <li class="nav-item">
@@ -40,7 +40,7 @@
             <p class="movie-name">{{ new_movie[i] }}</p>
             <button type="button" class="btn btn-outline-dark btn-block "><form action="/watchlist" method="post">
                 <input name="id" type="hidden" value="{{ new_movie[i] }}">
-                <input type="submit" value="Add to Cart">
+                <input class="form-control" type="submit" value="Add to Watchlist">
             </form></button>
           </div>
         </div>

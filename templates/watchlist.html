@@ -13,7 +13,7 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="navbar-brand" href="/movie"> Movies</i></a>
+            <a class="navbar-brand" href="/movie"></a>
           </li>
         </ul>
         <li class="nav-item">
@@ -25,25 +25,26 @@
 
 
   <div class="rec_movie_name">
-    <p>Result for {{ movie_name }}</p>
+    <p>Your Watchlist</p>
   </div>
 
-<div class="recommend_movie">
-  {% for movie, poster in movies_posters %}
-  <div class=" pricing-column col-lg-3 col-md-6">
-    <div class="card">
-      <div class="card-body">
-        <img src="{{  poster }}" alt="">
-        <p class="movie-name">{{ movie }}</p>
-        <button type="button" class="btn btn-outline-dark btn-block "><form action="/watchlist" method="post">
-            <input name="id" type="hidden" value="id">
-            <input type="submit" value="Add to Cart">
-        </form></button>
 
+  <div class="recommend_movie">
+
+
+    <div class="row">
+      {% for movie, poster in movies_posters %}
+      <div class=" pricing-column col-lg-3 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <img src="{{  poster }}" alt="">
+            <p class="movie-name">{{ movie }}</p>
+
+          </div>
+        </div>
       </div>
+      {% endfor %}
     </div>
   </div>
-  {% endfor %}
-</div>
 
-{% endblock %}
+  {% endblock %}
