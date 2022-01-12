@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from flask import Flask, render_template, request, redirect, session
 from flask_session import Session
 import pickle
@@ -24,6 +25,8 @@ from jedi.plugins import flask
 similarity = pickle.load(open('similarity.pkl', 'rb'))
 movies_dict = pickle.load(open('movies_dict.pkl', 'rb'))
 movies = pd.DataFrame(movies_dict)
+
+titles = movies['title'].to_numpy()
 
 
 
@@ -66,16 +69,12 @@ def recommend(movie):
 
 @app.route('/',  methods=['GET', 'POST'])
 def home():
-    movie_name = "Spectre"
     new_movie, poster = popular()
-    q = request.args.get("q")
-    if q:
-        for movie in movies:
-            if(re.match(q,movie.title)):
-                search_movies.append(movie)
-    else :
-        search_movies = []
-    return render_template('index.html', new_movie=new_movie, poster=poster, search_movies=search_movies)
+    return render_template('index.html', new_movie=new_movie, poster=poster,titles=titles)
+
+    if request.method == 'GET':
+        return render_template('index.html', titles=titles)
+
 
 
 

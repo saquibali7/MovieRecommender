@@ -71,9 +71,21 @@ footer {
   color:#f0f8ff;
 }
 
+.input-group {
+  margin-top:30px;
+}
+
+.header-box {
+  font-size: 40px;
+}
+
+
+
 .search-box {
   display: flex;
   flex-direction: row;
   position: center;
   margin: 10px;
+  background-color: white;
+box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
